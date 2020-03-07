@@ -97,8 +97,21 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
+        self.swap_item()  #start by grabbing item
+        while self.compare_item() is None: #begin loop
+            while self.move_right():
+                if self.compare_item() == 1:
+                    self.swap_item()  #while moving right if the held item is greater then swap items
+                elif self.compare_item() is None: #if either item is none then break
+                    break
+            else:   
+                while self.move_left(): #move left to empty spot
+                    if self.compare_item() is None: #if either item is none, then swap and move right to swap again
+                        self.swap_item()
+                        self.move_right()
+                        self.swap_item() 
+                        break   
         pass
-
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
