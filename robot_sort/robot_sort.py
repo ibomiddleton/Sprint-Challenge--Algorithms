@@ -97,21 +97,33 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        self.swap_item()  #start by grabbing item
-        while self.compare_item() is None: #begin loop
-            while self.move_right():
-                if self.compare_item() == 1:
-                    self.swap_item()  #while moving right if the held item is greater then swap items
-                elif self.compare_item() is None: #if either item is none then break
-                    break
-            else:   
-                while self.move_left(): #move left to empty spot
-                    if self.compare_item() is None: #if either item is none, then swap and move right to swap again
+        def robot_wake_up(): #robot turns on light and then grabs first item
+            self.set_light_on()
+            self.swap_item()  #start by grabbing item
+            print("After I sort this I will take over the world")
+        
+        def held_item_is_bigger(): #if the held item is bigger then the robot will swap with the item in front of him
+            if self.compare_item() == 1:
+                self.swap_item()
+
+        def move_left_to_swap():
+            if self.compare_item() is None: #if either item is none, then swap and move right to swap again
                         self.swap_item()
                         self.move_right()
-                        self.swap_item() 
-                        break   
-        pass
+                        self.swap_item()
+
+        robot_wake_up()    
+        while self.light_is_on(): #begin loop
+            while self.move_right(): #move to the right to compare next item
+                held_item_is_bigger()
+            if self.compare_item() is None: #if either item is none then break
+                self.swap_item()
+                break
+            else:   
+                while self.move_left(): #move left to empty spot
+                    move_left_to_swap()
+                    break  
+        pass 
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
