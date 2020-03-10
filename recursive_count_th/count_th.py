@@ -5,18 +5,13 @@ Your function must utilize recursion. It cannot contain any loops.
 '''
 
 def count_th(word):
-    count = {}
-    if 'th' in count:
-        count['th'] += 1
-    else:
-        count['th'] = 1
+    if len(word) <= 1:
+        return 0
+    if word[0:2] == 'th':
+        return count_th(word[1:]) + 1
+    return count_th(word[1:])
+print(count_th('asdbthaaiethignebdathasethasaabth')) #should print 5
 
-    for key in count:
-        if count[key] > 1:
-            print (key, count[key])
-
-# count = 0
-# def count_th(word):
-#     for i in word: 
-#         if i == 'th': 
-#             count = count + 1
+#every time theres match then line 11 will add to the count
+#if theres no matches at all then it will return 0
+# 0(n) because the longer the word means the more times the function is called
