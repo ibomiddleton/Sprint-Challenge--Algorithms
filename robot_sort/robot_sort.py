@@ -105,12 +105,6 @@ class SortingRobot:
             if self.compare_item() == 1:
                 self.swap_item()
 
-        def move_left_to_swap():
-            if self.compare_item() is None: #if either item is none, then swap and move right to swap again
-                self.swap_item()
-                self.move_right()
-                self.swap_item()
-
         robot_wake_up()    
         while self.light_is_on(): #begin loop
             while self.move_right(): #move to the right to compare next item
